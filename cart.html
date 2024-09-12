@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Multipage-Project - cart</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        html {
+            overflow-x: hidden;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: row;
+            background-color: rgb(238, 229, 229);
+            width: 100%;
+            height: 80px;
+            position: fixed;
+            top: 0px;
+        }
+        .navbar h1 {
+        color: black;
+        font-size: 35px;
+        }
+        .navbar h1:hover {
+        color:#2c4964;
+        transition: all;
+        transform: scale(1.2);
+        transition-duration: 2s;
+        }
+        .navbar ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        list-style-type: none;
+        gap: 70px;
+        }
+        .navbar .search {
+        width: 300px;
+        height: 40px;
+        border: 2px solid black;
+        border-radius: 30px;
+        text-align: end;
+        padding: 3px 6px 3px 0px;
+        }
+        .navbar li a {
+        color:black;
+        }
+        .navbar li a:hover {
+        color:#2c4964;
+        transition: all;
+        transform: scale(1.2);
+        transition-duration: 2s;
+        }
+        #bars{
+            display: none;
+            border:2px solid black;
+        }
+        #audio{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+            padding-top: 30px;
+        }
+        #audio .audio{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            padding-top: 30px;
+        }
+        #cart{
+            overflow: hidden;
+            background-image: url("https://images.unsplash.com/photo-1723039914210-a6f13a6931af?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            margin-top: 120px;
+            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            border: 5px solid black;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(1,1,1,1);
+        }
+        #cart h1{
+            font-size: 44px;
+        }
+        #cart .products{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            gap: 20px;
+        }
+        #cart .products div{
+            border: 2px solid black;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            gap: 50px;
+            border: 3px solid black;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(1,1,1,1);
+        }
+        #cart .products div h3{
+            font-size: 35px;
+        }
+        #cart .products div button{
+            padding: 10px 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(1,1,1,1);
+            background-color: black;
+            color: white;
+        }
+        #cart .products div button:hover{
+            background-color: white;
+            color: black;
+        }
+        #cart .code{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 100px;
+        }
+        #cart .code div{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            gap: 100px;
+        }
+        #cart .code div .box input{
+            padding: 10px 20px;
+            border: 2px solid black;
+            background-color: black;
+            box-shadow: 0 0 10px rgba(1,1,1,1);
+            color: white;
+        }
+        #cart .code div button{
+            padding: 10px 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(1,1,1,1);
+            background-color: black;
+            color: white;
+        }
+        #cart .code div button:hover{
+            color: black;
+            background-color: white;
+        }
+        #footer {
+        border: 5px solid black;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(1,1,1,1);
+        background-image: url("https://images.unsplash.com/photo-1723039914210-a6f13a6931af?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        color: black;
+        margin-top: 30px;
+        }
+        #footer .contact {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
+        }
+        #footer .contact h1 {
+        font-size: 44px;
+        }
+        #footer .contact p {
+        font-size: 25px;
+        }
+        #footer .contact .logo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        gap: 20px;
+        }
+        #footer .contact .logo i {
+        color: black;
+        }
+        #footer .customer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        gap: 20px;
+        margin: 0px 20px 0px 0px;
+        }
+        #footer .customer .p1 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        }
+        #footer .customer .p2 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        }
+        #footer .customer .p3 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        }
+
+        .foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        background-color: rgb(169, 166, 166);
+        }
+        .foot .foot1 {
+        color: black;
+        }
+        .foot .fppt2 {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: row;
+        gap: 10px;
+        color: blue;
+        }
+        @media (max-width:768px){
+            .navbar{
+                #bars{
+                display: block;
+                }
+            }
+            .navbar ul {
+                flex-direction:row;
+                position: absolute;
+                top: 80px;
+                background-color: #5e595950;
+                width: 100%;
+                height: 40px;
+                display: none;
+                gap: 10px;
+                text-align: center;
+            }
+            #input1:checked ~ .navbar ul {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+            }
+            .navbar ul .search{
+                display: none;
+            }
+            #cart{
+                width: 100%;
+            }
+            #cart .products{
+                width: 100%;
+            }
+            #cart .products div{
+                width: 100%;
+                flex-direction: column;
+            }
+            #cart .code{
+                gap: 20px;
+            }
+            #footer {
+                flex-direction: column;
+            }
+            #footer .customer {
+                margin-top: 20px;
+            }
+        }
+        @media (max-width:426px){
+            #cart .code {
+                flex-direction: column;
+            }
+            #footer {
+                flex-direction: column;
+            }
+            #footer .customer {
+            margin-top: 20px;
+            flex-direction: column;
+            }
+            .foot{
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" hidden id="input1"/>  
+    <div class="navbar">
+        <h1>DIGITAL-STORE</h1>
+        <ul>
+            <li><a href="./index.html"><i class="fa-solid fa-house fa-2x"></i></a></li>
+            <li class="search"><a href="./product.html"><i class="fa-solid fa-magnifying-glass fa-2x"></i></a></li>
+            <li><a href="./product.html"><i class="fa-solid fa-blog fa-2x"></i></a></li>
+            <li><a href="./log-in.html"><i class="fa-solid fa-user fa-2x"></i></a></li>
+            <li><a href="./cart.html"><i class="fa-solid fa-cart-shopping fa-2x"></i></a></li>
+        </ul>
+        <input type="checkbox" hidden id="input1"/>  
+        <label for="input1"><i id="bars" class="fa fa-bars fa-3x"></i></label>
+    </div>
+    <section id="cart">
+        <h1>Your Cart - Items</h1>
+        <div class="products">
+            <div>
+                <img src="https://transvelo.github.io/electro-html/2.0/assets/img/300X300/img7.png" alt="">
+                <h3>Widescreen NX Mini F1 SMART NX</h3>
+                <button>₹7,000</button>
+                <button>2</button>
+                <button>₹14,000</button>
+            </div>
+        </div>
+        <div class="code">
+            <div>
+                <div class="box">
+                    <input type="text" placeholder="Coupon-Code">
+                </div>
+                <button>Apply Coupon</button>
+            </div>
+            <div>
+                <button>Update Cart</button>
+                <a href="./checkout.html"><button>Proceed to checkout</button></a>
+            </div>
+        </div>
+    </section>
+    <section id="audio">
+        <h1>Explore Top  Brands</h1>
+        <div class="audio">
+            <div class="oneplus">
+                <img alt="Instant Bank Discount" src="https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/oneplus._SS300_QL85_FMpng_.png" class="a-dynamic-image sl-sobe-carousel-sub-card-img" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/oneplus._SS300_QL85_FMpng_.png&quot;:[300,300]}" style="max-width:100%;max-height:100%;">
+            </div>
+            <div class="realme">
+                <img alt="NA" src="https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/REALME._SS300_QL85_FMpng_.png" class="a-dynamic-image sl-sobe-carousel-sub-card-img" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/REALME._SS300_QL85_FMpng_.png&quot;:[300,300]}" style="max-width:100%;max-height:100%;">
+            </div>
+            <div class="sony">
+                <img alt="NA" src="https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/sony._SS300_QL85_FMpng_.png" class="a-dynamic-image sl-sobe-carousel-sub-card-img" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/sony._SS300_QL85_FMpng_.png&quot;:[300,300]}" style="max-width:100%;max-height:100%;">
+            </div>
+            <div class="samsung">
+                <img alt="NA" src="https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/samsung._SS300_QL85_FMpng_.png" class="a-dynamic-image sl-sobe-carousel-sub-card-img" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/samsung._SS300_QL85_FMpng_.png&quot;:[300,300]}" style="max-width:100%;max-height:100%;">
+            </div>
+            <div class="realme">
+                <img alt="NA" src="https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/REALME._SS300_QL85_FMpng_.png" class="a-dynamic-image sl-sobe-carousel-sub-card-img" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/REALME._SS300_QL85_FMpng_.png&quot;:[300,300]}" style="max-width:100%;max-height:100%;">
+            </div>
+            <div class="samsung">
+                <img alt="NA" src="https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/samsung._SS300_QL85_FMpng_.png" class="a-dynamic-image sl-sobe-carousel-sub-card-img" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/samsung._SS300_QL85_FMpng_.png&quot;:[300,300]}" style="max-width:100%;max-height:100%;">
+            </div>
+            <div class="oneplus">
+                <img alt="Instant Bank Discount" src="https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/oneplus._SS300_QL85_FMpng_.png" class="a-dynamic-image sl-sobe-carousel-sub-card-img" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/oneplus._SS300_QL85_FMpng_.png&quot;:[300,300]}" style="max-width:100%;max-height:100%;">
+            </div>
+            <div class="realme">
+                <img alt="NA" src="https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/REALME._SS300_QL85_FMpng_.png" class="a-dynamic-image sl-sobe-carousel-sub-card-img" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/REALME._SS300_QL85_FMpng_.png&quot;:[300,300]}" style="max-width:100%;max-height:100%;">
+            </div>
+            <div class="sony">
+                <img alt="NA" src="https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/sony._SS300_QL85_FMpng_.png" class="a-dynamic-image sl-sobe-carousel-sub-card-img" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/sony._SS300_QL85_FMpng_.png&quot;:[300,300]}" style="max-width:100%;max-height:100%;">
+            </div>
+            <div class="samsung">
+                <img alt="NA" src="https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/samsung._SS300_QL85_FMpng_.png" class="a-dynamic-image sl-sobe-carousel-sub-card-img" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/samsung._SS300_QL85_FMpng_.png&quot;:[300,300]}" style="max-width:100%;max-height:100%;">
+            </div>
+            <div class="realme">
+                <img alt="NA" src="https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/REALME._SS300_QL85_FMpng_.png" class="a-dynamic-image sl-sobe-carousel-sub-card-img" data-a-dynamic-image="{&quot;https://m.media-amazon.com/images/G/31/img24hp/shopbybrand/new/REALME._SS300_QL85_FMpng_.png&quot;:[300,300]}" style="max-width:100%;max-height:100%;">
+            </div>
+        </div>
+    </section>
+    <section id="footer">
+        <div class="contact">
+            <h1>DIGITAL-STORE</h1>
+            <i class="fa-solid fa-phone"> +91 - 1234567890</i>
+            <h2>Contact - info. </h2>
+            <p>17 Princess Road, London, Greater London NW1 8JR, UK</p>
+            <div class="logo">
+                <a href="https://github.com/SanataniPrashant">
+                    <i class="fa-brands fa-github fa-2x"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/prashant-pandey-4691b0269">
+                    <i class="fa-brands fa-linkedin-in fa-2x"></i>
+                </a>
+                <a href="https://www.instagram.com/prashantpandey8203">
+                    <i class="fa-brands fa-instagram fa-2x"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100070945707257&mibextid=ZbWKwL">
+                    <i class="fa-brands fa-facebook fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <div class="customer">
+            <div class="p1">
+                <h2><b>Find it Fast</b></h2>
+                <h3>Laptops & Computers</h3>
+                <h3>Cameras & Photography</h3>
+                <h3>Smart Phones & Tablets</h3>
+                <h3>Video Games & Consoles</h3>
+                <h3>TV & Audio</h3>
+                <h3>Gadgets</h3>
+                <h3>Car Electronic & GPS</h3>
+            </div>
+            <div class="p2">
+                <h2><b>Find it Fast</b></h2>
+                <h3>Printers & Ink</h3>
+                <h3>Software</h3>
+                <h3>Office Supplies</h3>
+                <h3>Computer Components</h3>
+                <h3>Accesories</h3>
+                <h3>Find it Fast</h3>
+                <h3>Accesories</h3>
+
+            </div>
+            <div class="p3">
+                <h2><b>Customer Care</b></h2>
+                <h3>My Account</h3>
+                <h3>Order Tracking</h3>
+                <h3>Wish List</h3>
+                <h3>Customer Service</h3>
+                <h3>Returns / Exchange</h3>
+                <h3>FAQs</h3>
+                <h3>Product Support</h3>
+            </div>
+        </div>
+    </section>
+    <section class="foot">
+        <div class="foot1">
+            <h2>© <b>Electro </b>- All rights Reserved</h2>
+        </div>
+        <div class="foot2">
+            <i class="fa-brands fa-cc-visa fa-2x"></i>
+            <i class="fa-brands fa-cc-mastercard fa-2x"></i>
+            <i class="fa-brands fa-cc-discover fa-2x"></i>
+            <i class="fa-brands fa-paypal fa-2x"></i>
+            <a href="#landing"><i class="fa-solid fa-arrow-up fa-3x"></i></a>
+        </div>
+    </section>
+</body>
+</html>

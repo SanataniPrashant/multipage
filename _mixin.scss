@@ -1,0 +1,15 @@
+@mixin flex($x,$y){
+    display: flex;
+    justify-content: $y;
+    align-items: center;
+    flex-direction: $x;
+}
+@mixin hover($x,$y,$z){
+    color: $x;
+    transition: all;
+    transform: scale($y);
+    transition-duration: $z;
+}
+@mixin audio{
+    
+}
